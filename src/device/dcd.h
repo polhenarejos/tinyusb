@@ -158,7 +158,7 @@ bool dcd_edpt_open            (uint8_t rhport, tusb_desc_endpoint_t const * desc
 void dcd_edpt_close_all       (uint8_t rhport);
 
 // Submit a transfer, When complete dcd_event_xfer_complete() is invoked to notify the stack
-bool dcd_edpt_xfer            (uint8_t rhport, uint8_t ep_addr, uint8_t * buffer, uint16_t total_bytes);
+bool dcd_edpt_xfer            (uint8_t rhport, uint8_t ep_addr, uint8_t * buffer, uint16_t total_bytes, uint16_t data_len);
 
 // Submit an transfer using fifo, When complete dcd_event_xfer_complete() is invoked to notify the stack
 // This API is optional, may be useful for register-based for transferring data.

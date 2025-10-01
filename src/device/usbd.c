@@ -1386,7 +1386,7 @@ bool usbd_edpt_release(uint8_t rhport, uint8_t ep_addr) {
   return tu_edpt_release(ep_state, _usbd_mutex);
 }
 
-bool usbd_edpt_xfer(uint8_t rhport, uint8_t ep_addr, uint8_t* buffer, uint16_t total_bytes) {
+bool usbd_edpt_xfer(uint8_t rhport, uint8_t ep_addr, uint8_t* buffer, uint16_t total_bytes, uint16_t data_len) {
   rhport = _usbd_rhport;
 
   uint8_t const epnum = tu_edpt_number(ep_addr);
@@ -1409,7 +1409,7 @@ bool usbd_edpt_xfer(uint8_t rhport, uint8_t ep_addr, uint8_t* buffer, uint16_t t
   // could return and USBD task can preempt and clear the busy
   _usbd_dev.ep_status[epnum][dir].busy = 1;
 
-  if (dcd_edpt_xfer(rhport, ep_addr, buffer, total_bytes)) {
+  if (dcd_edpt_xfer(rhport, ep_addr, buffer, total_bytes, data_len)) {
     return true;
   } else {
     // DCD error, mark endpoint as ready to allow next transfer
